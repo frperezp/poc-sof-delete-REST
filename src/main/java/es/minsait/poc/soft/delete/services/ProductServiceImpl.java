@@ -1,11 +1,11 @@
-package es.minsait.pocsoftdelete.services;
+package es.minsait.poc.soft.delete.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import es.minsait.pocsoftdelete.model.Product;
-import es.minsait.pocsoftdelete.repositories.ProductRepository;
+import es.minsait.poc.soft.delete.model.Product;
+import es.minsait.poc.soft.delete.repositories.ProductRepository;
 
 
 @Service
@@ -21,11 +21,22 @@ public class ProductServiceImpl implements ProductService{
 
 
 	@Override
-	public List<Product> findAllProducts() {
+	public List<Product> findAll() {
 		// TODO Auto-generated method stub
 		return productRepository.findAll();
 	}
 
+	@Override
+	public Product save(Product product) {
+		// TODO Auto-generated method stub
+		return productRepository.save(product);
+	}
+	
+	@Override
+	public Product update(Product product) {
+		// TODO Auto-generated method stub
+		return productRepository.save(product);
+	}
 
 	@Override
 	public void deleteProductByID(Long id) {
@@ -34,5 +45,8 @@ public class ProductServiceImpl implements ProductService{
 		productRepository.deleteById(id);
 		
 	}
+
+
+
 
 }

@@ -1,11 +1,11 @@
-package es.minsait.pocsoftdelete.services;
+package es.minsait.poc.soft.delete.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import es.minsait.pocsoftdelete.model.ProductFlag;
-import es.minsait.pocsoftdelete.repositories.ProductFlagRepository;
+import es.minsait.poc.soft.delete.model.ProductFlag;
+import es.minsait.poc.soft.delete.repositories.ProductFlagRepository;
 
 
 @Service
@@ -21,18 +21,28 @@ public class ProductFlagServiceImpl implements ProductFlagService{
 
 
 	@Override
-	public List<ProductFlag> findAllProducts() {
+	public List<ProductFlag> findAll() {
 		// TODO Auto-generated method stub
 		return productFlagRepository.findAll();
 	}
 
+	@Override
+	public ProductFlag save(ProductFlag productFlag) {
+		// TODO Auto-generated method stub
+		return productFlagRepository.save(productFlag);
+	}
+	
+	@Override
+	public ProductFlag update(ProductFlag productFlag) {
+		// TODO Auto-generated method stub
+		return productFlagRepository.save(productFlag);
+	}
 
 	@Override
 	public void deleteProductByID(Long id) {
 		// TODO Auto-generated method stub
 		//productRepository.delete(product);
-		productFlagRepository.deleteById(id);
-		
+		productFlagRepository.deleteById(id);	
 	}
 
 }

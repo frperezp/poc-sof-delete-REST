@@ -1,8 +1,8 @@
-package es.minsait.pocsoftdelete.repositories;
+package es.minsait.poc.soft.delete.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.minsait.pocsoftdelete.model.Product;
+import es.minsait.poc.soft.delete.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
  

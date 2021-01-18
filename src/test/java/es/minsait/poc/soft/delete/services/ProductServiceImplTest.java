@@ -1,38 +1,28 @@
-package es.minsait.pocsoftdelete.services;
+package es.minsait.poc.soft.delete.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
-import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import es.minsait.pocsoftdelete.model.Product;
-import es.minsait.pocsoftdelete.repositories.ProductRepository;
+import es.minsait.poc.soft.delete.model.Product;
+import es.minsait.poc.soft.delete.services.ProductService;
 
 class ProductServiceImplTest {
 	
 	ProductService productServiceMock = mock(ProductService.class);
-	
-	
-
-	/*public ProductServiceImplTest(ProductRepository productRepository) {
-		this.productRepository = productRepository;
-	}*/
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
 
 	@Test
-	void listOfAllProductsTest() {
-		
+	void testFindAllProducts() {
 		Product productMockOne = mock(Product.class);
 		Product productMockTwo = mock(Product.class);
 		Product productMockThree = mock(Product.class);
@@ -42,17 +32,15 @@ class ProductServiceImplTest {
 		
 		when(productServiceMock.findAllProducts()).thenReturn(products);
 		
-		assertEquals(4, products.size());
-		
+		assertEquals(3, products.size());
 	}
-	
-//	@Test
-//	void deleteProductByIdTest() {
+
+	@Test
+	void testDeleteProductByID() {
 //		
 //		verify(productServiceMock.deleteProductByID(4L));
 //		
 //		assertEquals(4, products.size());
-//
-//	}
+	}
 
 }

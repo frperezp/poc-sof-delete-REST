@@ -1,4 +1,4 @@
-package es.minsait.pocsoftdelete;
+package es.minsait.poc.soft.delete;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package es.minsait.pocsoftdelete;
+package es.minsait.poc.soft.delete;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

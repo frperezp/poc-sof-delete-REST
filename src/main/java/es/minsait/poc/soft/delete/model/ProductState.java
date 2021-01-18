@@ -1,4 +1,4 @@
-package es.minsait.pocsoftdelete.model;
+package es.minsait.poc.soft.delete.model;
 
 public enum ProductState {
 	
