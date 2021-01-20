@@ -1,133 +1,81 @@
 package es.minsait.poc.soft.delete.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.given;
 
-import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import es.minsait.poc.soft.delete.model.Product;
+import es.minsait.poc.soft.delete.repositories.ProductRepository;
+import es.minsait.poc.soft.delete.services.ProductService;
 
-
+@DataJpaTest
+//@Slf4j
 class ProductControllerTest {
-	
-	
-	public static Session session;
-	public static SessionFactory factory;
-	
+
+	@Mock
+	ProductRepository productRepository;
+
+	@Mock
+	ProductService productService;
+
+	@InjectMocks
+	ProductController productController;
+
+	static List<Product> listProducts = new ArrayList<>();
+
+	@Mock
+	Product iphoneDocePro;
+
+	@Mock
+	static Product iphoneXP;
+
 	@BeforeAll
-	void beforeTests() {
-		System.out.println("Before all Tests");
-//		factory = new Configuration().configure("hibernate.cfg.xml")
-//		  		.addAnnotatedClass(Product.class).buildSessionFactory();
-		factory = new Configuration().configure("application.properties")
-		  		.addAnnotatedClass(Product.class).buildSessionFactory();
-		
-		session = factory.openSession();
-	}
-	
-	@BeforeEach
-	void forEachTest(){
-		
-		session.beginTransaction();
-        
-        Product iphoneX = new Product();
-        iphoneX.setName("iPhone X");
-        iphoneX.setFromInstant(Instant.parse("2019-04-09T10:15:30.00Z"));
-        iphoneX.setToInstant(Instant.parse("2021-01-11T10:17:46.00Z"));
-         
-        session.save(iphoneX);
-        
-        Product iphoneXP= new Product();
-        iphoneXP.setName("iPhone X Plus");
-        iphoneXP.setFromInstant(Instant.parse("2019-04-09T10:15:30.00Z"));
-        iphoneXP.setToInstant(Instant.parse("2021-01-01T10:15:30.00Z"));
-         
-        session.save(iphoneXP);
-        
-        Product iphoneXR= new Product();
-        iphoneXR.setName("iPhone XR");
-        iphoneXR.setFromInstant(Instant.parse("2019-04-09T10:15:30.00Z"));
-        iphoneXR.setToInstant(Instant.parse("2021-01-31T10:15:30.00Z"));
-         
-        session.save(iphoneXR);
+	static void setUpBeforeClass() throws Exception {
 
-        Product iphoneXS= new Product();
-        iphoneXS.setName("iPhone XS");
-        iphoneXS.setFromInstant(Instant.parse("2019-04-09T10:15:30.00Z"));
-        iphoneXS.setToInstant(Instant.parse("2021-01-31T10:15:30.00Z"));
-         
-        session.save(iphoneXS);
-        
-        session.getTransaction().commit();
-	}
-	
-	
-	@Test
-	void testGetAllProducts() {
-		try {	 
-            session.beginTransaction();            
-            List<Product> productos = session.createQuery("from Product").getResultList();
-            session.getTransaction().commit();
-            
-            for(Product product : productos) {
-            	System.out.println("Nombre del producto " + product.getName());
-            }
-            
-            
-            System.out.println("List size " + productos.size());
-            assertEquals(productos.size(), 3);
-            
-            
-            System.out.println("Succefull connection");
-             
-            
-            
-        } catch (Exception ex) {
-        	System.out.println(ex.getMessage());
-            ex.printStackTrace();
-            fail("Not yet implemented");
-        }
+		listProducts.add(iphoneXP);
+		listProducts.add(iphoneXP);
+		listProducts.add(iphoneXP);
+
 	}
 
 	@Test
-	void testDeleteProduct() {
-		try {	 
-			
-			
-			session.beginTransaction();            
-	        session.delete(factory);
-	        session.getTransaction().commit();
-			
-			
-            session.beginTransaction();            
-            List<Product> productos = session.createQuery("from Product").getResultList();
-            session.getTransaction().commit();
-            
-            for(Product product : productos) {
-            	System.out.println("Nombre del producto " + product.getName());
-            }
-            
-            
-            System.out.println("List size " + productos.size());
-            assertEquals(productos.size(), 3);
-            
-            
-            System.out.println("Succefull connection");
-             
-            
-            
-        } catch (Exception ex) {
-        	System.out.println(ex.getMessage());
-            ex.printStackTrace();
-            fail("Not yet implemented");
-        }
+	void testGetAll() {
+
+		given(productService.findAll()).willReturn(listProducts);
+
+		assertEquals(new ResponseEntity<>(listProducts, HttpStatus.OK), productController.getAll());
+	}
+
+	@Test
+	void testInsert() {
+
+		given(productService.save(iphoneDocePro)).willReturn(iphoneDocePro);
+
+		assertEquals(new ResponseEntity<>(iphoneDocePro, HttpStatus.OK), productController.insert(iphoneDocePro));
+
+	}
+
+	@Disabled
+	@Test
+	void testUpdate() {
+
+	}
+	
+	@Disabled
+	@Test
+	void testDelete() {
+
 	}
 
 }

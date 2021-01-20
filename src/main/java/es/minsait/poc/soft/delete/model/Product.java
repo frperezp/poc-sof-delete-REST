@@ -18,19 +18,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
 
 import org.hibernate.annotations.ResultCheckStyle;
 
-//@SQLDelete(sql = "UPDATE product SET toInstant = (select * from CURRENT_TIMESTAMP()) WHERE id = ?", check = ResultCheckStyle.COUNT)
-//CURRENT_TIMESTAMP()
-
-
-@Slf4j
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode//(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -39,21 +33,18 @@ import org.hibernate.annotations.ResultCheckStyle;
 @Where(clause = "current_timestamp between fromInstant and toInstant")
 public class Product {
 
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  @Column(name = "id", updatable = false, nullable = false)
-	      private Long id;
-	 
-	      @Column
-	      private String name;
-	 
-	      @Column
-	      private Instant fromInstant;
-	      
-	      @Column
-	      private Instant toInstant;
-      
-      
-      
-}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id;
 
+	@Column// @EqualsAndHashCode.Include
+	private String name;
+
+	@Column
+	private Instant fromInstant;
+
+	@Column
+	private Instant toInstant;
+
+}

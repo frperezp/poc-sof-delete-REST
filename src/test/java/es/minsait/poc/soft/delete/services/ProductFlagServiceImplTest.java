@@ -13,48 +13,47 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import es.minsait.poc.soft.delete.model.Product;
-import es.minsait.poc.soft.delete.repositories.ProductRepository;
+import es.minsait.poc.soft.delete.model.ProductFlag;
+import es.minsait.poc.soft.delete.repositories.ProductFlagRepository;
 
 @DataJpaTest
-class ProductServiceImplTest {
+class ProductFlagServiceImplTest {
 
 	@Mock
-	ProductRepository productRepository;
+	ProductFlagRepository productFlagRepository;
 
 	@InjectMocks
-	ProductServiceImpl productServiceImpl;
+	ProductFlagServiceImpl productFlagServiceImpl;
 
-	static List<Product> listProducts = new ArrayList<>();
-
-	@Mock
-	Product iphoneDocePro;
+	static List<ProductFlag> listProductFlags = new ArrayList<>();
 
 	@Mock
-	static Product iphoneXP;
+	ProductFlag iphoneDocePro;
+
+	@Mock
+	static ProductFlag iphoneXP;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 
-		listProducts.add(iphoneXP);
-		listProducts.add(iphoneXP);
-		listProducts.add(iphoneXP);
+		listProductFlags.add(iphoneXP);
+		listProductFlags.add(iphoneXP);
+		listProductFlags.add(iphoneXP);
 
 	}
 
 	@Test
 	void testFindAll() {
+		given(productFlagRepository.findAll()).willReturn(listProductFlags);
 
-		given(productRepository.findAll()).willReturn(listProducts);
-
-		assertEquals(listProducts, productServiceImpl.findAll());
+		assertEquals(listProductFlags, productFlagServiceImpl.findAll());
 	}
 
 	@Test
 	void testSave() {
-		given(productRepository.save(iphoneDocePro)).willReturn(iphoneDocePro);
+		given(productFlagRepository.save(iphoneDocePro)).willReturn(iphoneDocePro);
 
-		assertEquals(iphoneDocePro, productServiceImpl.save(iphoneDocePro));
+		assertEquals(iphoneDocePro, productFlagServiceImpl.save(iphoneDocePro));
 	}
 
 	@Test
