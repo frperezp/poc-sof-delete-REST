@@ -1,0 +1,8 @@
+{
+	"name": "poc-soft-delete",
+	"version": "1.0.0",
+	"dependencies": {
+		"mkdirp": "^1.0.4",
+		"newman": "^4.6.1"
+	}
+}

@@ -50,9 +50,7 @@ public class ProductFlagController {
 	@PutMapping(value = "/product-flag")
 	ResponseEntity<ProductFlag> insert(@RequestBody ProductFlag productFlag) {
 
-		log.debug("Deleting {}, {} and {}", 1, 2, 3);
 		productFlagService.save(productFlag);
-		log.debug("Deleting {}, {} and {}", 1, 2, 3);
 
 		return new ResponseEntity<>(productFlag, HttpStatus.OK);
 	}
@@ -67,9 +65,7 @@ public class ProductFlagController {
 	@PostMapping(value = "/product-flag")
 	ResponseEntity<ProductFlag> update(@RequestBody ProductFlag productFlag) {
 
-		log.debug("Deleting {}, {} and {}", 1, 2, 3);
 		productFlagService.update(productFlag);
-		log.debug("Deleting {}, {} and {}", 1, 2, 3);
 
 		return new ResponseEntity<>(productFlag, HttpStatus.OK);
 	}
@@ -84,9 +80,7 @@ public class ProductFlagController {
 	@DeleteMapping(value = "/product-flag/{id}")
 	ResponseEntity<Long> delete(@PathVariable Long id) {
 
-		log.debug("Deleting {}, {} and {}", 1, 2, 3);
-		productFlagService.deleteProductByID(id);
-		log.debug("Deleting {}, {} and {}", 1, 2, 3);
+		productFlagService.deleteByID(id);
 
 		return new ResponseEntity<>(id, HttpStatus.OK);
 	}

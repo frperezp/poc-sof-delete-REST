@@ -1,13 +1,15 @@
 package es.minsait.poc.soft.delete.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -61,14 +63,18 @@ class ProductFlagControllerTest {
 
 	}
 
-	@Disabled
 	@Test
 	void testUpdate() {
+		given(productFlagService.save(iphoneDocePro)).willReturn(iphoneDocePro);
+
+		assertEquals(new ResponseEntity<>(iphoneDocePro, HttpStatus.OK), productFlagController.update(iphoneDocePro));
 	}
 
-	@Disabled
 	@Test
 	void testDelete() {
+		productFlagController.delete(1L);
+		verify(productFlagService, times(1)).deleteByID(anyLong());
+
 	}
 
 }

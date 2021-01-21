@@ -59,12 +59,10 @@ class ProductServiceImplTest {
 
 	@Test
 	void testUpdate() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	void testDeleteProductByID() {
-		fail("Not yet implemented");
 	}
 
 }

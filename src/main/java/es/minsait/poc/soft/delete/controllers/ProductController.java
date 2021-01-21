@@ -65,9 +65,7 @@ public class ProductController {
 	@PostMapping(value = "/product")
 	ResponseEntity<Product> update(@RequestBody Product product) {
 
-		log.debug("Updating {}, {} and {}", 1, 2, 3);
 		productService.update(product);
-		log.debug("Updating??? {}, {} and {}", 1, 2, 3);
 
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
@@ -83,7 +81,7 @@ public class ProductController {
 	ResponseEntity<Long> delete(@PathVariable Long id) {
 
 		log.debug("Deleting {}, {} and {}", 1, 2, 3);
-		productService.deleteProductByID(id);
+		productService.deleteByID(id);
 		log.debug("Deleting {}, {} and {}", 1, 2, 3);
 
 		return new ResponseEntity<>(id, HttpStatus.OK);
