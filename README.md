@@ -79,7 +79,7 @@ Para poder obtener la lista de productos activos en base de datos, se debe ejecu
 ```
 (GET) http://localhost:8080/api/v1/product-flags
 ```
-### Inserción de un producto activo
+#### Inserción de un producto activo
 Para poder insertar en la base de datos se debe hacer un PUT con la siguiente url y un JSON en el body del request:
 ```
 (PUT) http://localhost:8080/api/v1/product-flag
@@ -92,7 +92,7 @@ Formato del JSON:
 }
 ```
 
-### Actualización de un producto activo
+#### Actualización de un producto activo
 Para poder insertar en la base de datos se debe hacer un POST con la siguiente url y un JSON en el body del request:
 ```
 (POST) http://localhost:8080/api/v1/product-flag
